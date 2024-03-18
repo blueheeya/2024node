@@ -18,7 +18,7 @@ const UserSchema =  mongoose.Schema({
     },
     age: Number,
     email: String
-},{timeStemps:true})
+},{TimeRanges:true})
 
 const User =  mongoose.model( "User", UserSchema)
 module.exports = {User}
