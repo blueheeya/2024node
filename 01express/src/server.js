@@ -79,6 +79,43 @@ async function server() {
       }
     })
 
+    // app.put("",function(){})
+    app.put("/user/:userID",async function(req,res){
+      try {
+        let {userID} = req.params;
+        if(!mongoose.isValidObjectId(userID)){
+          return res.status(400).send({ error: "유저가 없네요" })
+        }
+
+        let {age} = req.body;
+        //age velue 확인
+        if(!age){
+          return res.status(400).send({ error: "나이가 없네요" })
+        } 
+        if(typeof age !== "number"){
+          return res.status(400).send({ error: "숫자를 입력해 주세요"})
+        }
+        const user = await User.findByIdAndUpdate(
+          userID,
+          {$set : {age}},
+          {new:true}
+        );
+
+        //여러개 
+        // let{username,email} = req.body;
+        // const user = await User.findByIdAndUpdate(
+        //   userID,
+        //   {$set : {username,email}},
+        //   {new:true}// 화면에서 바로 반영
+        // );
+
+
+          return res.send({user})
+      } catch(error){
+        return res.status(500).send({ error: error.message })
+      }
+    })
+
     app.listen(3000)
   } catch (error) {
     console.log("잘못 연결")
