@@ -2,9 +2,10 @@ const express = require('express')
 const app = express()
 const mongoose = require("mongoose")
 const {User} =  require("./model/User.js")
-const users = [];
+const dotenv = require("dotenv")
+dotenv.config()
+//prose
 
-const MONGO_URL = "mongodb+srv://blueheeya12:iuGrxChEcp9f2Nel@jojunghee.rpjni1f.mongodb.net/book?retryWrites=true&w=majority&appName=jojunghee"; //몽고 디비 주소값과 패스워드 값 
 
 // let result = mongoose.connect(MONGO_URL); //promise
 
@@ -14,7 +15,7 @@ const MONGO_URL = "mongodb+srv://blueheeya12:iuGrxChEcp9f2Nel@jojunghee.rpjni1f.
 
 const server = async function(){ //async를 붙혀서 promise로 만들어주지만 성공 값만 출력됨 -> try catch문으로 성공과 실패를 구분지어 나눠준다
   try{
-    await mongoose.connect(MONGO_URL);
+    await mongoose.connect(process.env.MONGO_URL);
     console.log("db connected")
     app.use(express.json()); //json 언어로 변경하기
   
@@ -44,7 +45,7 @@ const server = async function(){ //async를 붙혀서 promise로 만들어주지
     // 02
     // let username = req.body.username
     // let name = req.body.name
-    // let{username,name} = req.body
+    //=>한 줄로 let{username,name} = req.body
     try {
       let {username, name} = req.body;
       if(!username) {
