@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const mongoose = require("mongoose")
 const dotenv = require("dotenv");
-const { userRouter } = require('./routes/userRouter.js');
-const { blogRouter } = require('./routes/blogRouter.js');
+const { userRouter } = require('./routers/userRouter.js');
+const { blogRouter } = require('./routers/blogRouter.js');
 
 dotenv.config();
 //process.env.MONGO_URL
