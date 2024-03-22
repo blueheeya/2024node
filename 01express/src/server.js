@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 const dotenv = require("dotenv");
 const { userRouter } = require('./routers/userRouter.js');
 const { blogRouter } = require('./routers/blogRouter.js');
+const { commentRouter } = require('./routers/commentRouter.js');
 
 dotenv.config();
 //process.env.MONGO_URL
@@ -23,6 +24,7 @@ async function server() {
     app.use(express.json()) //json 언어로 변경하기
     app.use("/user",userRouter)
     app.use("/blog",blogRouter)
+    app.use("/blog/:blogId/comment",commentRouter)
     
 
     app.listen(3000)

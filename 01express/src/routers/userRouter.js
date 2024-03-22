@@ -46,16 +46,16 @@ userRouter.post("/", async function (req, res) {
 
   })
 
-  userRouter.delete("/:userID", async function(req,res){
+  userRouter.delete("/:userId", async function(req,res){
     try{
-    // let userID =  req.params.userID;
-    let {userID} =  req.params;
+    // let userId =  req.params.userId;
+    let {userId} =  req.params;
     
-    if(!mongoose.isValidObjectId(userID)){
+    if(!mongoose.isValidObjectId(userId)){
       return res.status(400).send({ error: "유저가 없네요" })
     }
 
-    const user = await User.findByIdAndDelete({_id:userID})
+    const user = await User.findByIdAndDelete({_id:userId})
     return res.send({user});
     } catch(error){
       return res.status(500).send({ error: error.message })
@@ -63,10 +63,10 @@ userRouter.post("/", async function (req, res) {
   })
 
   // userRouter.put("",function(){})
-  userRouter.put("/:userID",async function(req,res){
+  userRouter.put("/:userId",async function(req,res){
     try {
-      let {userID} = req.params;
-      if(!mongoose.isValidObjectId(userID)){
+      let {userId} = req.params;
+      if(!mongoose.isValidObjectId(userId)){
         return res.status(400).send({ error: "유저가 없네요" })
       }
 
@@ -79,7 +79,7 @@ userRouter.post("/", async function (req, res) {
         return res.status(400).send({ error: "숫자를 입력해 주세요"})
       }
       const user = await User.findByIdAndUpdate(
-        userID,
+        userId,
         {$set : {age}},
         {new:true}
       );
@@ -87,7 +87,7 @@ userRouter.post("/", async function (req, res) {
       //여러개 
       // let{username,email} = req.body;
       // const user = await User.findByIdAndUpdate(
-      //   userID,
+      //   userId,
       //   {$set : {username,email}},
       //   {new:true}// 화면에서 바로 반영
       // );

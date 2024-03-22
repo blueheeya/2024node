@@ -6,9 +6,9 @@ const blogRouter = Router();
 
 blogRouter.post("/",async function(req,res){
     try{
-      const {title,content,islive,userID} = req.body;
+      const {title,content,islive,userId} = req.body;
 
-      let user = await User.findById(userID);
+      let user = await User.findById(userId);
       if(!user){
         return res.status(400).send({error:"유저가 없어요!!!"})
       }
@@ -55,7 +55,6 @@ blogRouter.delete("/:blogId",async function(req,res){
     } catch (error) {
         return res.status(500).send({ error: error.message })
       }
-
 })
 blogRouter.put("/:blogId",async function(req,res){
     try{
